@@ -1,20 +1,24 @@
+// Select all price cells using the data attribute
+const priceCells = document.querySelectorAll('[data-ns-test="price"]');
 
-const rows = document.querySelectorAll("tr");
-
+// Calculate total by looping through all price cells
 let total = 0;
-
-for (let i = 1; i < rows.length; i++) {
-    const priceCell = rows[i].querySelector("td:nth-child(2)");
-    total += Number(priceCell.innerText);
+for (let i = 0; i < priceCells.length; i++) {
+    total += Number(priceCells[i].innerText);
 }
 
+// Create new row for the grand total
 const newRow = document.createElement("tr");
 
+// Create cell that spans 2 columns
 const totalCell = document.createElement("td");
-totalCell.innerText = "Total: " + total + " Rs";
-totalCell.colSpan = 2; 
+totalCell.colSpan = 2;
+totalCell.setAttribute('data-ns-test', 'grandTotal');
+totalCell.innerText = total;
 
+// Add cell to row
 newRow.appendChild(totalCell);
 
+// Add row to table
 const table = document.querySelector("table");
 table.appendChild(newRow);
